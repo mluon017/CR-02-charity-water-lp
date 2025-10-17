@@ -1,37 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- The charset and viewport meta tags help the browser render the page correctly on all devices -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>charity: water</title>
+  <!-- Link to the external stylesheet. Make sure the filename matches (styles.css) -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- The header contains the logo and primary action button (Give) -->
   <header class="navbar">
+    <!-- .logo groups the image and site title together; useful for styling with CSS -->
     <div class="logo">
+      <!-- img tag displays the organization's logo. The alt attribute describes the image for screen readers -->
       <img src="img/cw_logo-2.png" alt="charity water logo">
-      <h1>charity: water</h1>
+      <!-- h1 is the main page heading. There should usually be only one h1 per page -->
+      <h1></h1>
     </div>
+
+    <!-- This button is a clear call-to-action in the navigation bar. It has a class so CSS can style it easily -->
     <button class="give-button">Give</button>
   </header>
 
+  <!-- The hero section is the large, top area of the page with an image and the main message -->
   <section class="hero">
+    <!-- .overlay is a semi-transparent layer placed on top of the image to make text easier to read -->
     <div class="overlay"></div>
-    <img src="https://images.unsplash.com/photo-1605510834313-ff3dd3f6df04?auto=format&fit=crop&w=1200&q=80" alt="clean water image" class="hero-image">
 
+    <!-- .hero-text holds the heading, description and donation box. It sits above the image using z-index -->
     <div class="hero-text">
+      <!-- Use <br> carefully to force line breaks inside headings for a specific visual layout -->
       <h2>Give with Purpose:<br> Empower Communities<br> Through Clean Water</h2>
+
+      <!-- Simple paragraph explaining the mission. Paragraphs help separate blocks of text for readability -->
       <p>Your donation provides life-changing water solutions, with 100% of your support going directly to sustainable projects that transform lives.</p>
 
+      <!-- The donation box is a self-contained UI element with amount options and a CTA button -->
       <div class="donation-box">
-        <h3>Amount to Donate</h3>
+        <!-- Replace the plain h3 with a filled header bar to separate the controls -->
+        <div class="donation-header">
+          <h3>Amount to Donate</h3>
+        </div>
+
+        <!-- .buttons groups the preset amount buttons and the input field for a custom amount -->
         <div class="buttons">
-          <button>$</button>
-          <button>$$</button>
-          <button>$$$</button>
-          <button>$$$$</button>
+          <!-- These <button> elements are clickable options. They can be wired to JavaScript later to set the amount -->
+          <button>$5</button>
+          <button>$25</button>
+          <button>$75</button>
+          <button>$100</button>
+
+          <!-- An input field lets the user type a custom amount. The placeholder shows an example format -->
           <input type="text" placeholder="$____">
         </div>
+
+        <!-- Primary call-to-action inside the donation box. Styling is handled by the .cta-button class -->
         <button class="cta-button">GIVE TODAY</button>
       </div>
     </div>

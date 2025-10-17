@@ -12,6 +12,14 @@ Secondary Colors:
 - Dark Green: #159A48
 - Pink:       #F16061
 
+Colors I Used: 
+- Yellow:       #FFC907 
+- Light Orange: #FFF7e1
+- gray azure:   #77a8bb
+- burnt orange: #bf6c46
+- dark grey:    #1a1a1a
+- grey:         #cbccd1
+
 Fonts:
 - Proxima Nova
 - Avenir
@@ -23,29 +31,61 @@ Fonts:
   This CSS uses the provided color palette and beginner-friendly styles.
 */
 
-/* General reset */
+/* General reset
+   Connotation: Removes default browser spacing and makes box sizing predictable.
+   This ensures elements behave the same across browsers and makes layout simpler.
+*/
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Ensure the html and body elements fill the viewport height
+   Connotation: Allows us to use 100vh-like layouts and ensures a full-page background covers the screen.
+*/
+html, body {
+  height: 100%;
+}
+
+/* Page background using the Nepal image
+   Connotation: Setting the image on the body makes it fill the entire page (not just the hero).
+   background-size: cover -> scales the image to always fill the viewport while keeping aspect ratio.
+   background-position: center -> keeps the most important part of the photo centered.
+   background-attachment: fixed -> optional visual effect where the image does not move when you scroll.
+*/
 body {
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  /* Set the full-page background image */
+  background-image: url("img/nepal-charity-water.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  /* Basic typography for the whole page
+     Connotation: Picks a clean, readable font and sets a neutral text color.
+  */
+  font-family: "Proxima Nova", Avenir;
   color: #333;
   line-height: 1.5;
 }
 
-/* Header / Navbar */
+/* Header / Navbar
+   Connotation: A simple horizontal bar with logo on the left and call-to-action on the right.
+   display:flex aligns items in a row and makes spacing easier.
+*/
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fff;
+  background: #fff; /* Keeps the navbar readable above the background photo */
   padding: 10px 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* subtle separation from the page */
 }
 
+/* Logo group
+   Connotation: Keeps the logo image and site title aligned and spaced nicely.
+*/
 .logo {
   display: flex;
   align-items: center;
@@ -53,13 +93,16 @@ body {
 }
 
 .logo img {
-  height: 28px;
+  height: 28px; /* small consistent height for the logo */
   width: auto;
   display: block;
 }
 
+/* Give button in the header
+   Connotation: Bright button to attract attention. Hover rule gives visual feedback when interactive.
+*/
 .give-button {
-  background-color: #ffcc00;
+  background-color: #FFC907;
   border: none;
   padding: 8px 20px;
   border-radius: 4px;
@@ -68,27 +111,31 @@ body {
 }
 
 .give-button:hover {
-  background-color: #f5b800;
+  background-color: #FFC907;
 }
 
-/* Hero Section */
+/* Hero Section
+   Connotation: Main top area of the page that should feel large and impactful.
+   min-height 100vh ensures it fills the entire viewport so the background image is visible.
+*/
 .hero {
   position: relative;
-  /* Use min-height so very small preview windows still show content without forcing a full viewport height */
-  min-height: 60vh;
+  min-height: 100vh;
   max-height: 100vh;
-  overflow: hidden;
+  overflow: hidden; /* prevents overflow from child elements */
 }
 
+/* Hide any old inline hero <img> if still present
+   Connotation: Prevents duplicate images when the background is set on the body.
+*/
 .hero-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: none;
 }
 
+/* Overlay layer
+   Connotation: Semi-transparent dark layer above the image to make white text readable.
+   It sits absolutely to cover the full hero area.
+*/
 .overlay {
   background: rgba(0, 0, 0, 0.3);
   position: absolute;
@@ -98,16 +145,19 @@ body {
   bottom: 0;
 }
 
+/* Hero text container
+   Connotation: Keeps the main heading and donation box readable and visually grouped.
+   z-index ensures this content sits above the overlay and background image.
+*/
 .hero-text {
   position: relative;
   z-index: 1;
   color: white;
   max-width: 480px;
-  /* use padding instead of large margins so content adapts to narrow preview panes */
-  padding: 40px 20px;
-  margin-left: 20px;
+  padding: 40px 20px; /* internal spacing so text doesn't touch edges */
+  margin-left: 20px;  /* positions the block away from the left edge */
   margin-top: 40px;
-  background: linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.15));
+  background: linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.15)); /* subtle fade to help legibility */
   border-radius: 6px;
 }
 
@@ -121,21 +171,46 @@ body {
   margin-bottom: 25px;
 }
 
-/* Donation Box */
+/* Donation Box
+   Connotation: A compact card for donation controls. Uses a light background so inputs are easy to read.
+*/
 .donation-box {
   background-color: rgba(255, 255, 255, 0.95);
   color: #333;
   padding: 14px;
   border-radius: 10px;
   max-width: 340px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12); /* subtle floating effect */
 }
 
-.donation-box h3 {
+/* Filled header bar at the top of the donation card
+   Connotation: visually separates the label from the interactive controls */
+.donation-header {
+  background-color: #77a8bb; /* requested color */
+  color: #ffffff;
   text-align: center;
-  margin-bottom: 10px;
+  font-weight: bold;
+  padding: 10px 14px;
+  margin: -14px -14px 10px -14px; /* extend to the card edges (card padding is 14px) */
+  border-radius: 10px 10px 0 0; /* match the donation-box top corners */
 }
 
+/* Remove default h3 spacing inside the header so the bar looks clean */
+.donation-header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Donation control sizing
+   Connotation: Use a single variable so button widths are consistent.
+   Change --donation-btn-width as needed to make the input match visually. */
+:root {
+  --donation-btn-width: 96px; /* adjust this value to taste */
+}
+
+/* Buttons / amount controls
+   Connotation: A group of quick-select amount buttons plus an input for custom values.
+   flex-wrap allows them to wrap on small screens. */
 .buttons {
   display: flex;
   flex-wrap: wrap;
@@ -144,6 +219,7 @@ body {
   margin-bottom: 15px;
 }
 
+/* Make each preset button a fixed width so we can compute the input size */
 .buttons button {
   background: #e0e0e0;
   border: none;
@@ -151,23 +227,37 @@ body {
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
+
+  /* Ensure a consistent width for first and last buttons (and others) */
+  flex: 0 0 var(--donation-btn-width);
+  text-align: center;
 }
 
+/* Hover remains the same */
 .buttons button:hover {
   background: #d5d5d5;
 }
 
+/* Custom amount input
+   Connotation: Make the input width equal to the width of the first + last button.
+   Calculation includes one gap (10px) between them so the visual width matches. */
 .buttons input {
-  width: 80px;
+  width: calc(var(--donation-btn-width) * 2 + 10px);
   text-align: center;
   padding: 8px;
   border-radius: 5px;
   border: 1px solid #ccc;
+
+  /* Prevent input from stretching differently in the flex layout */
+  flex: 0 0 auto;
 }
 
+/* Primary CTA inside the donation box
+   Connotation: Full-width, obvious button to submit the donation action.
+*/
 .cta-button {
   width: 100%;
-  background-color: #ffcc00;
+  background-color: #FFC907;
   border: none;
   padding: 10px;
   border-radius: 5px;
@@ -176,5 +266,15 @@ body {
 }
 
 .cta-button:hover {
-  background-color: #f5b800;
+  background-color: #FFC907;
+}
+
+/* Color overrides
+   Connotation: Ensure important CTA text and headings use the requested light color for visual consistency. */
+.give-button,
+.cta-button,
+.donation-header h3,
+.hero-text h2,
+.hero-text p {
+  color: #FFF7e1;
 }
