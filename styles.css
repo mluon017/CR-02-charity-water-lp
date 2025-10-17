@@ -68,19 +68,24 @@ body {
   font-family: "Proxima Nova", Avenir;
   color: #333;
   line-height: 1.5;
+
+  padding-top: 80px;          /* must match .navbar height */
 }
 
-/* Header / Navbar
-   Connotation: A simple horizontal bar with logo on the left and call-to-action on the right.
-   display:flex aligns items in a row and makes spacing easier.
-*/
+/* Make the header fixed at the top and larger */
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;               /* larger header height */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fff; /* Keeps the navbar readable above the background photo */
-  padding: 10px 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* subtle separation from the page */
+  background: #fff;
+  padding: 0 28px;            /* horizontal padding only (vertical handled by height) */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  z-index: 1000;              /* ensure it sits above the hero/background */
 }
 
 /* Logo group
@@ -89,11 +94,11 @@ body {
 .logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 14px;                  /* more room between logo and title */
 }
 
 .logo img {
-  height: 28px; /* small consistent height for the logo */
+  height: 44px;               /* increased from 28px */
   width: auto;
   display: block;
 }
@@ -104,9 +109,10 @@ body {
 .give-button {
   background-color: #FFC907;
   border: none;
-  padding: 8px 20px;
-  border-radius: 4px;
+  padding: 12px 26px;         /* larger clickable area */
+  border-radius: 6px;
   font-weight: bold;
+  font-size: 1rem;            /* larger text */
   cursor: pointer;
 }
 
