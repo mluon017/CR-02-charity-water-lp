@@ -39,6 +39,19 @@ Fonts:
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  /* Apply Proxima Nova to every element as the default font.
+     Connotation: ensures all text (headings, paragraphs, buttons, inputs)
+     uses the requested font with safe fallbacks. */
+  font-family: "Proxima Nova", Avenir, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Ensure form controls explicitly inherit the global font */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 /* Ensure the html and body elements fill the viewport height
@@ -65,7 +78,6 @@ body {
   /* Basic typography for the whole page
      Connotation: Picks a clean, readable font and sets a neutral text color.
   */
-  font-family: "Proxima Nova", Avenir;
   color: #333;
   line-height: 1.5;
 
@@ -156,13 +168,13 @@ body {
    z-index ensures this content sits above the overlay and background image.
 */
 .hero-text {
-  position: relative;
+  position: absolute;
+  bottom: 60px;
+  right: 60px;
   z-index: 1;
   color: white;
   max-width: 480px;
   padding: 40px 20px; /* internal spacing so text doesn't touch edges */
-  margin-left: 20px;  /* positions the block away from the left edge */
-  margin-top: 40px;
   background: linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.15)); /* subtle fade to help legibility */
   border-radius: 6px;
 }
@@ -283,4 +295,108 @@ body {
 .hero-text h2,
 .hero-text p {
   color: #FFF7e1;
+}
+
+@media (max-width: 768px) {
+  /* Reposition hero content for smaller screens */
+  .hero-text {
+    position: static;        /* remove absolute positioning */
+    margin: 40px 20px;       /* add space from edges */
+    text-align: center;      /* center all text and buttons */
+    background: rgba(0, 0, 0, 0.4); /* slightly darker for readability */
+  }
+
+  /* Make heading slightly smaller for better fit */
+  .hero-text h2 {
+    font-size: 1.6rem;
+  }
+
+  /* Center the donation box */
+  .donation-box {
+    margin: 20px auto 0 auto; /* centers horizontally */
+    max-width: 90%;           /* fits within screen width */
+  }
+
+  /* Stack navbar items vertically if needed */
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 10px 0;
+  }
+
+  .logo img {
+    height: 36px; /* slightly smaller logo */
+  }
+
+  .give-button {
+    margin-top: 10px;
+  }
+}
+
+/* Tablet Responsive Adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-text {
+    position: absolute;       /* stays anchored inside the hero */
+    bottom: 40px;             /* a bit higher than desktop */
+    right: 40px;
+    max-width: 400px;         /* slightly narrower for tablets */
+    padding: 30px 18px;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-text h2 {
+    font-size: 1.8rem;        /* adjusts heading size for tablets */
+  }
+
+  .donation-box {
+    max-width: 320px;
+  }
+
+  .navbar {
+    padding: 0 20px;          /* tighter navbar padding */
+  }
+
+  .give-button {
+    padding: 10px 22px;       /* keeps button proportional */
+    font-size: 0.95rem;
+  }
+}
+
+.breakpoint-indicator {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background-color: #333;
+  color: white;
+  font-size: 0.8rem;
+  padding: 6px 10px;
+  border-radius: 4px;
+  opacity: 0.7;
+  z-index: 2000;
+  pointer-events: none; /* so it doesn't block buttons */
+}
+
+/* Desktop View (default) */
+.breakpoint-indicator::after {
+  content: "Desktop View ≥ 1025px";
+  background-color: #4CAF50; /* green */
+  padding: 4px 6px;
+  border-radius: 3px;
+}
+
+/* Tablet View */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .breakpoint-indicator::after {
+    content: "Tablet View (769–1024px)";
+    background-color: #2196F3; /* blue */
+  }
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  .breakpoint-indicator::after {
+    content: "Mobile View ≤ 768px";
+    background-color: #FF9800; /* orange */
+  }
 }
