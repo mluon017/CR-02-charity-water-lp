@@ -23,6 +23,10 @@ Colors I Used:
 Fonts:
 - Proxima Nova
 - Avenir
+- if anybody is actually checking the html and style files, i just want you to know that I watched 1122 episodes of one piece within 7~ months lol (my favorite character is probably tragedy man trafalgar d. water law or sa d. bo lol) 
+  - alsoo uhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh what was i gonna say my favorite pretimeskip arc hands down is the entirety of water 7 leading into enies lobby and my favortie post timeskip is tentatively whole cake island idk the entire run post time skip of punk hazard to wano is so good  i miss watching one piece </3 
+  - okay but the run of sabaody to marineford is just chef's kiss amazing; luffy's canon event is so heartwrenching but so well done im just glazing one piece because im procrastinating lol 
+- i've also got like 5 assignments due this weekend, a presentaion group project on monday 10/20, and a midterm for a financial management class on tuesday 10/21 so fun weekend im having here alrighty 
 
 */
 
@@ -197,8 +201,10 @@ body {
   color: #333;
   padding: 14px;
   border-radius: 10px;
-  max-width: 340px;
+  width: 100%;
+  max-width: none;
   box-shadow: 0 6px 18px rgba(0,0,0,0.12); /* subtle floating effect */
+  box-sizing: border-box;
 }
 
 /* Filled header bar at the top of the donation card
@@ -216,7 +222,9 @@ body {
 /* Remove default h3 spacing inside the header so the bar looks clean */
 .donation-header h3 {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.3rem;
+  font-weight: 700; 
+  letter-spacing: 0.5px;
 }
 
 /* Donation control sizing
@@ -226,66 +234,72 @@ body {
   --donation-btn-width: 96px; /* adjust this value to taste */
 }
 
-/* Buttons / amount controls
-   Connotation: A group of quick-select amount buttons plus an input for custom values.
-   flex-wrap allows them to wrap on small screens. */
+/* Donation buttons layout: 3 buttons on top, 1 + input on the second row */
 .buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 10px;                   /* space between all items */
   justify-content: center;
   margin-bottom: 15px;
 }
 
-/* Make each preset button a fixed width so we can compute the input size */
+/* All buttons share a consistent base style */
 .buttons button {
-  background: #e0e0e0;
+  background: #cbccd1;
   border: none;
-  padding: 10px 15px;
+  padding: 12px 0;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
-
-  /* Ensure a consistent width for first and last buttons (and others) */
-  flex: 0 0 var(--donation-btn-width);
+  flex: 1 1 calc(33.33% - 10px); /* 3 buttons per row, evenly spaced */
   text-align: center;
 }
 
-/* Hover remains the same */
+/* Hover effect */
 .buttons button:hover {
   background: #d5d5d5;
 }
 
-/* Custom amount input
-   Connotation: Make the input width equal to the width of the first + last button.
-   Calculation includes one gap (10px) between them so the visual width matches. */
+/* Input field styling */
 .buttons input {
-  width: calc(var(--donation-btn-width) * 2 + 10px);
-  text-align: center;
-  padding: 8px;
-  border-radius: 5px;
   border: 1px solid #ccc;
-
-  /* Prevent input from stretching differently in the flex layout */
-  flex: 0 0 auto;
+  border-radius: 5px;
+  text-align: center;
+  padding: 10px;
+  font-size: 1rem;
+  flex: 1 1 calc(66.66% - 10px); /* stretches to fill space of 2 buttons */
+  box-sizing: border-box;
 }
+
+/* Make sure wrapping looks correct */
+.buttons button:nth-child(4) {
+  flex: 1 1 calc(33.33% - 10px); /* ensures $100 aligns under the first button */
+}
+
 
 /* Primary CTA inside the donation box
    Connotation: Full-width, obvious button to submit the donation action.
 */
 .cta-button {
+  display: block;
   width: 100%;
   background-color: #FFC907;
   border: none;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 14px 0;
+  border-radius: 6px;
   font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
+  text-align:center; 
+  box-sizing: border-box;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .cta-button:hover {
   background-color: #FFC907;
+  tranform: scale(1.02);
 }
+
 
 /* Color overrides
    Connotation: Ensure important CTA text and headings use the requested light color for visual consistency. */
@@ -398,5 +412,58 @@ body {
   .breakpoint-indicator::after {
     content: "Mobile View ≤ 768px";
     background-color: #FF9800; /* orange */
+  }
+}
+
+/* smooth fade animation for breakpoint label lol */ 
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(5px); }
+  10% { opacity:  0.8; transform: translateY(0); }
+    90% { opacity: 0.8; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(5px); }
+}
+
+.breakpoint-indicator::after {
+  display: inline-block; 
+  animation: fadeInOut 2.5s ease-in-out;
+  transition: background-color 0.5s ease;
+}
+
+/* i like adjusting the spacing a lot smiles */
+/* okay work time uhhhh this is for the mobile buttons adjustment */
+/* i didnt like how it looked lol commented out  */
+/*@media (max-width: 600px) {
+  .buttons {
+    flex-direction: column; 
+    gap: 8px; 
+  }
+}
+
+.buttons button {
+  flex: 1 1 100%; 
+  padding: 12px 0;  
+}
+
+.butons input {
+  width: 100%;
+}*/
+
+/* tis for mobile button spacing */
+@media (max-width: 600px) {
+  .buttons {
+    flex-direction: column;   /* stack all items vertically */
+    gap: 8px;
+    align-items: stretch;     /* make each full width */
+  }
+
+  .buttons button,
+  .buttons input {
+    flex: 1 1 100%;           /* make each item fill the width */
+    width: 100%;
+  }
+
+  .buttons button {
+    padding: 12px 0;          /* good tap area */
   }
 }
